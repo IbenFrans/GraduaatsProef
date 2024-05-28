@@ -1,0 +1,88 @@
+$green: #13CF56;
+$blue: #64AFC6;
+$black: #333333;
+$white: #F7F7F7;
+$grey: #5E5E5E;
+
+$white_transparent: #F7F7F750;
+$lightblue: #64AFC625;
+$lightgreen: #13CF5625;
+
+$font-xl: 40;
+$font-lg: 20;
+$font-md: 14;
+$font-sm: 12;
+
+@mixin centerDiv(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin bottomnoborder(){
+    margin-bottom: 1rem;
+}
+
+@mixin bottomborder(){
+    padding-bottom: 1rem;
+    border-bottom: 1px $grey solid;
+}
+
+@mixin bottomborderwhite(){
+    @include bottomborder();
+    border-width: 2px;
+    border-color: $white;
+}
+
+@mixin titleFont($size, $color){
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    font-size: $size;
+    color: $color;
+}
+
+@mixin button($color, $colortext){
+    padding: 0.5rem;
+    padding-left: 1rem;
+    width: 130px;
+    border-radius: 20px;
+    border: 1px solid;
+    background-color: $color;
+    color: $colortext;
+    text-align: left;
+    &:hover{
+        background-color: darken($color, 10%);
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: $black;
+    font-family: "Rubik", sans-serif;
+    font-weight: $font-md;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body{
+    background-image: url("@/assets/MediaKitBackground.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mainHeader{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+}
+
+main{
+    min-height: 100vh;
+    margin-left: 33.3%;
+    background-color: $white;
+    width: 100%;
+    padding: 1rem;
+}

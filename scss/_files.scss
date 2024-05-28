@@ -1,0 +1,72 @@
+@use 'base' as *;
+
+.files_topBar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .files_topBar_left, .files_topBar_right{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h2, select{
+            margin-right: 1rem;
+            span{
+                color: lighten($grey, 25%);
+            }
+        }
+        
+        select{
+            border: none;
+            background-color: $white;
+        }
+
+        .files_topBar_right_changeFormat{
+            display: flex;
+            div{
+                @include centerDiv;
+                width: 2rem;
+                height: 2rem;
+                background-color: $lightgreen;
+                border-radius: 5px;
+                svg path{
+                    fill: $black;
+                }
+
+                &.selected, &:hover{
+                    background-color: $green;
+                    svg path{
+                        fill: $white;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.files_list_extra{
+    @include bottomborderwhite;
+    margin-bottom: 1rem;
+    div{
+        margin-bottom: 1rem;
+    }
+
+    .files_list_extra_links_list, .files_list_extra_tags_list{
+        display: flex;
+        p{
+            margin-right: 1rem;
+        }
+    }
+}
+
+.files_list{
+    background-color: $lightblue;
+    padding: 1rem 1rem 0 1rem;
+    
+    .files_list_description{
+        @include bottomborderwhite;
+        margin-bottom: 1rem;
+    }
+}
