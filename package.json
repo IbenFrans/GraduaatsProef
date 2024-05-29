@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^10.12.2",
     "iconify-icon": "^2.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
