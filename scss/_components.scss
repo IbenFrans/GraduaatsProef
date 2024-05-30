@@ -17,6 +17,9 @@
         }
         .banner_buttons{
             display: flex;
+            input{
+                display: none;
+            }
 
             button{
                 @include button($green, $white);
@@ -68,6 +71,7 @@
         p {
             padding: 0.5rem;
             box-shadow: 14px 15px 40px 0px rgba(0,0,0,0.1);
+            background-color: $white;
             
         }
     }

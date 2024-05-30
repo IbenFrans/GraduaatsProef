@@ -5,10 +5,20 @@ import FileList from '@/components/FileListComponent.vue'
 export default{
     props:[
         "files",
+        "title"
     ],
     components:{
         Icon,
         FileList,
+    },
+    computed:{
+      render(){
+        if(["Recent", "Favourites"].includes(this.title)){
+          return false;
+        } else{
+          return true
+        }
+      }
     }
 }
 </script>
@@ -21,14 +31,14 @@ export default{
 
 
         <div class="files_topBar_left">
-          <h2><span>Directory/Apps/</span>All files</h2>
-          <Icon icon="ic:baseline-edit" />
+          <h2>{{ title }}</h2>
+          <Icon icon="ic:baseline-edit" v-if="render" />
         </div>
 
 
         <div class="files_topBar_right">
 
-          <div class="files_topBar_right_dropdown">
+          <div class="files_topBar_right_dropdown" v-if="render">
             <select name="filter">
               <option value="naam">Naam</option>
               <option value="grootte">Grootte</option>
@@ -49,7 +59,7 @@ export default{
 
       <!-- file lijst -->
     <div class="files_list">
-      <div class="files_list_extra">
+      <!-- <div class="files_list_extra">
 
         <div class="files_list_extra_description">
           <h3>Description:</h3>
@@ -72,9 +82,9 @@ export default{
             <p>tag</p>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="files_list_items">
-        <FileList :items="this.files" />
+        <FileList :files="this.files" />
       </div>
     </div>
     </section>
