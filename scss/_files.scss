@@ -64,9 +64,94 @@
 .files_list{
     background-color: $lightblue;
     padding: 1rem 1rem 0 1rem;
+    border-radius: 5px;
     
     .files_list_description{
         @include bottomborderwhite;
         margin-bottom: 1rem;
+    }
+}
+.fileDetailTopBanner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .fileDetailName{
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    svg{
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-left: 1rem;
+    }
+}
+
+
+.fileDetail{
+    background-color: $lightblue;
+    padding: 1rem;
+    border-radius: 5px;
+ 
+    .detailItem{
+        display: flex;
+        margin-bottom: 0.5rem;
+        div{
+            margin-left: 0.5rem;
+        }
+        .title{
+            font-weight: 500;
+        }
+    }
+
+    .fileDetail_imgdetails{
+        display: flex;
+        .fileDetail_imgdetails_details{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        img{
+            margin-right: 1rem;
+            width: 60%;
+        }
+        h3{
+            margin-bottom: 0.5rem;
+        }
+        .detailButton{
+            cursor: pointer
+        }
+    }
+
+    .fileDetail_extraDetails{
+        margin-top: 1rem;
+        .detailItem div{
+            margin-left: 0;
+        }
+        .tags{
+            display: flex;
+            .tag{
+                display: flex;
+                align-items: center;
+                padding: 0.3rem 0.5rem;
+                background-color: $blue;
+                border-radius: 20px;
+                margin-right: 0.5rem;
+                border: none;
+                p{
+                    color: $white;
+                    margin-right: 0.5rem;
+                }
+                svg path{
+                    fill: white;
+                }
+            }
+        }
+        .links{
+            display: flex;
+            .link{
+                margin-right: 0.5rem;
+                text-decoration: underline;
+            }
+        }
     }
 }

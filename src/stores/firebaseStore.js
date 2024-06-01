@@ -1,29 +1,29 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import storage from '@/firebase'
-import { deleteObject } from "firebase/storage";
+import { deleteObject, getDownloadURL, updateMetadata } from "firebase/storage";
 
-export const useFirebaseStore = defineStore('firebase',{
+export const useFirebaseStore = defineStore('firebase', {
   state: () => ({
-      files: [],
-      folders: [],
+    files: [],
+    folders: [],
   }),
-  getters:{
-    favourites(){
+  getters: {
+    favourites() {
       let favourites = []
-      this.files.forEach((file) =>{
-        if(file.favourite === "true"){
+      this.files.forEach((file) => {
+        if (file.favourite === "true") {
           favourites.push(file)
         }
       })
       return favourites
     },
-    sortDateNewToOld(){
+    sortDateNewToOld() {
       return this.files.sort((a, b) => {
-        return  new Date(b.updated) - new Date(a.updated)
+        return new Date(b.updated) - new Date(a.updated)
       })
-      
-    }
+
+    },
   },
   actions: {
     async fetchFiles() {
@@ -40,6 +40,16 @@ export const useFirebaseStore = defineStore('firebase',{
           const created = metaData.timeCreated
           const updated = metaData.updated
           const favourite = metaData.customMetadata.favourite
+          const description = metaData.customMetadata.description
+          let tags = JSON.parse(metaData.customMetadata.tags)
+          if (!tags) {
+            tags = ""
+          }
+          let links = JSON.parse(metaData.customMetadata.links)
+          if (!links) {
+            links = ""
+          }
+
 
 
           const type = name.split('.').pop();
@@ -50,7 +60,10 @@ export const useFirebaseStore = defineStore('firebase',{
             size: size,
             created: created,
             updated: updated,
-            favourite: favourite
+            favourite: favourite,
+            tags: tags,
+            description: description,
+            links: links
           };
           tempFileList.push(fileObj);
         }
@@ -59,16 +72,19 @@ export const useFirebaseStore = defineStore('firebase',{
         console.log(error);
       }
     },
-    async fetchFolders(){
+    getFile(name) {
+      return this.files.find(file => file.name === name)
+    },
+    async fetchFolders() {
       const storageRef = storage.ref();
       const tempFolderList = []
-      try{
+      try {
         const result = await storageRef.listAll()
-        for(const prefix of result.prefixes){
+        for (const prefix of result.prefixes) {
           tempFolderList.push(prefix.fullPath)
         }
         this.folders = tempFolderList
-      } catch (error){
+      } catch (error) {
         console.log(error)
       }
     },
@@ -112,10 +128,35 @@ export const useFirebaseStore = defineStore('firebase',{
         console.log('Error deleting file:', error);
       }
     },
+    loadImage(location, filename) {
+      let starsRef = storage.ref(location).child(filename);
+      console.log(starsRef)
+      starsRef.getDownloadURL().then(url => {
+        return url
+      });
+    },
+    async updateFile(filename, customMetadata) {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(filename);
+      try {
+        const metadata = {
+          customMetadata: customMetadata,
+          created: (new Date()).toUTCString
+        };
+        await fileRef.updateMetadata(metadata);
+        console.log('File is updated');
 
-
+        // Update local state after updating metadata
+        const file = this.files.find(file => file.name === filename);
+        if (file) {
+          file.favourite = status;
+        }
+      } catch (error) {
+        console.log('Error updating file:', error);
+      }
+    },
   },
-  onCreated(){
+  onCreated() {
     this.fetchFiles()
   }
 })

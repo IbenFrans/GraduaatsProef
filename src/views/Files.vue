@@ -1,14 +1,27 @@
 <script>
 import Banner from "@/components/BannerComponent.vue"
+import FileSection from '@/components/FileSectionCompontent.vue'
 
-export default{
-    data(){
-        return{
+import { useFirebaseStore } from "@/stores/firebaseStore.js"
 
+export default {
+    data() {
+        return {
+            firebaseStore: useFirebaseStore(),
+            files: []
         }
     },
-    components:{
+    components: {
         Banner,
+        FileSection,
+    },
+    computed: {
+        allFiles() {
+            return this.firebaseStore.files
+        },
+    },
+    created() {
+        this.firebaseStore.fetchFiles()
     }
 }
 </script>
@@ -16,5 +29,6 @@ export default{
 <template>
     <main>
         <Banner />
+        <FileSection title="All Files" :files="this.allFiles" />
     </main>
 </template>

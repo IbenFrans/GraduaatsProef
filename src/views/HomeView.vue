@@ -3,6 +3,7 @@ import Banner from '@/components/BannerComponent.vue'
 import FileList from '@/components/FileListComponent.vue'
 import FileCard from '@/components/FileCardComponent.vue'
 import FileSection from '@/components/FileSectionCompontent.vue'
+import FilterCard from '@/components/FilterCardComponent.vue'
 
 import { Icon } from "@iconify/vue"
 import { iconExists } from 'iconify-icon'
@@ -17,11 +18,11 @@ export default{
       files: [],
 
       fileTypes: [
-        {type: "BrandGuide", icon: "baseline-format-paint"},
-        {type: "Documents", icon: "baseline-insert-drive-file"},
-        {type: "PDFs", icon: "baseline-picture-as-pdf"},
-        {type: "Images", icon: "baseline-image"},
-        {type: "Videos", icon: "baseline-play-circle"},
+        {type: "BrandGuide", icon: "baseline-format-paint", color: "#c66464"},
+        {type: "Documents", icon: "baseline-insert-drive-file", color: "#d2d453"},
+        {type: "PDFs", icon: "baseline-picture-as-pdf", color: "#7bc664"},
+        {type: "Images", icon: "baseline-image", color: "#64AFC6"},
+        {type: "Videos", icon: "baseline-play-circle", color: "#c364c6"},
       ],
     }
   },
@@ -31,6 +32,7 @@ export default{
     FileCard,
     FileSection,
     Icon,
+    FilterCard,
   },
   computed:{
     favourites(){
@@ -43,7 +45,6 @@ export default{
       return this.firebaseStore.files
     },
     folders(){
-      console.log(this.firebaseStore.folders)
       return this.firebaseStore.folders
     }
   },
@@ -61,7 +62,7 @@ export default{
   <main>
     <Banner />
     <div class="fileTypeList">
-      <FileCard v-for="file in this.fileTypes" :type="file.type" :icon="this.iconSet + file.icon" />
+      <FilterCard v-for="file in this.fileTypes" :type="file.type" :icon="this.iconSet + file.icon"  :color="file.color"/>
     </div>
     <FileList title="Favourites" :files="this.favourites"/>
 

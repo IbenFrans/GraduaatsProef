@@ -35,16 +35,19 @@ export default{
         },
         dynamicName(){
             if(this.name && this.name.length > 25){
-                return this.name.substr(0,10) + "..." + this.name.substr(this.name.length-10, this.name.length)
+                return this.name.substr(0,9) + "..." + this.name.substr(this.name.length-9, this.name.length)
             } else{
                 return this.name
             }
+        },
+        getDetailPath(){
+            return "/Files/Detail/" + this.name
         }
     },
     methods:{
         deleteFile(){
             this.firebaseStore.deleteFile(this.name)
-        }
+        },
     }
 
 }
@@ -52,7 +55,8 @@ export default{
 </script>
 
 <template>
-    <div class="fileType" @click="deleteFile">
+    <router-link :to="getDetailPath">
+    <div class="fileType">
         <div class="fileType_background" :style="{ backgroundImage: 'url(' + this.getUrl + ')' }" >
             <div v-if="this.getIcon" class="fileType_circleIcon">
                 <Icon :icon="this.getIcon" />
@@ -60,4 +64,5 @@ export default{
         </div>
         <p>{{ dynamicName }}</p>
     </div>
+    </router-link>
 </template>

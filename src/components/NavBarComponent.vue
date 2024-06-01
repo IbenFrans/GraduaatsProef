@@ -13,7 +13,7 @@ export default{
                 {path: "/BrandGuide", name: "BrandGuide", icon: "baseline-format-paint"},
                 {path: "/Recent", name: "Recent", icon: "loop"},
                 {path: "/Favourites", name: "Favourites", icon: "star"},
-                {path: "/AllFiles", name: "All files", icon: "baseline-arrow-right"}
+                {path: "/Files/All", name: "All files", icon: "baseline-arrow-right"}
             ],
             settings: {path: "/Settings", name: "Settings", icon: "settings"},
 

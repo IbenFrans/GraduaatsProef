@@ -4,6 +4,7 @@ import BrandGuide from '../views/BrandGuide.vue'
 import Recent from '../views/Recent.vue'
 import Favourites from '../views/Favourites.vue'
 import Files from '../views/Files.vue'
+import FileDetail from '../views/FileDetail.vue'
 import Settings from '../views/Settings.vue'
 
 const router = createRouter({
@@ -30,9 +31,13 @@ const router = createRouter({
       component: Favourites
     },
     {
-      path: '/AllFiles',
+      path: '/Files/:filter',
       name: 'files',
       component: Files
+    },
+    {
+      path: '/Files/Detail/:name',
+      component: FileDetail
     },
     {
       path: '/Settings',
