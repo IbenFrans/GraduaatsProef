@@ -36,10 +36,10 @@ export default{
   },
   computed:{
     favourites(){
-      return this.firebaseStore.favourites
+      return this.firebaseStore.favourites.slice(0,5)
     },
     recent(){
-      return this.firebaseStore.sortDateNewToOld
+      return this.firebaseStore.sortDateNewToOld.slice(0,5)
     },
     allFiles(){
       return this.firebaseStore.files
@@ -61,7 +61,7 @@ export default{
 <template>
   <main>
     <Banner />
-    <div class="fileTypeList">
+    <div class="fileTypeTiles">
       <FilterCard v-for="file in this.fileTypes" :type="file.type" :icon="this.iconSet + file.icon"  :color="file.color"/>
     </div>
     <FileList title="Favourites" :files="this.favourites"/>

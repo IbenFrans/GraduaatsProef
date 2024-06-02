@@ -122,7 +122,8 @@ export default {
   </div>
 
   <div v-if="showConfirmation" class="fileUploadScreen">
-    <p>{{ this.selectedFile.name }}</p>
+    <label>{{ this.selectedFile.name }}</label>
+    <input v-model="this.selectedFile.name"></input>
     <input type="text" @keyup.enter="addTag(tag)" v-model="tag" />
     <p v-for="tag in this.tags">{{ tag }}</p>
     <label for="favourite">Favourite</label>

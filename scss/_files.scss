@@ -1,42 +1,49 @@
 @use 'base' as *;
 
-.files_topBar{
+.files_topBar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 
-    .files_topBar_left, .files_topBar_right{
+    .files_topBar_left,
+    .files_topBar_right {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        h2, select{
+        h2,
+        select {
             margin-right: 1rem;
-            span{
+
+            span {
                 color: lighten($grey, 25%);
             }
         }
-        
-        select{
+
+        select {
             border: none;
             background-color: $white;
         }
 
-        .files_topBar_right_changeFormat{
+        .files_topBar_right_changeFormat {
             display: flex;
-            div{
+
+            div {
                 @include centerDiv;
                 width: 2rem;
                 height: 2rem;
                 background-color: $lightgreen;
                 border-radius: 5px;
-                svg path{
+
+                svg path {
                     fill: $black;
                 }
 
-                &.selected, &:hover{
+                &.selected,
+                &:hover {
                     background-color: $green;
-                    svg path{
+
+                    svg path {
                         fill: $white;
                     }
                 }
@@ -46,40 +53,51 @@
     }
 }
 
-.files_list_extra{
+.files_list_extra {
     @include bottomborderwhite;
     margin-bottom: 1rem;
-    div{
+
+    div {
         margin-bottom: 1rem;
     }
 
-    .files_list_extra_links_list, .files_list_extra_tags_list{
+    .files_list_extra_links_list,
+    .files_list_extra_tags_list {
         display: flex;
-        p{
+
+        p {
             margin-right: 1rem;
         }
     }
 }
 
-.files_list{
+.files_list {
     background-color: $lightblue;
     padding: 1rem 1rem 0 1rem;
     border-radius: 5px;
-    
-    .files_list_description{
+
+    .files_list_description {
         @include bottomborderwhite;
         margin-bottom: 1rem;
     }
+
+    h2 {
+        text-align: center;
+        padding: 5rem 0;
+    }
 }
-.fileDetailTopBanner{
+
+.fileDetailTopBanner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .fileDetailName{
+
+    .fileDetailName {
         margin-bottom: 0.5rem;
         font-weight: 600;
     }
-    svg{
+
+    svg {
         height: 1.5rem;
         width: 1.5rem;
         margin-left: 1rem;
@@ -87,49 +105,58 @@
 }
 
 
-.fileDetail{
+.fileDetail {
     background-color: $lightblue;
     padding: 1rem;
     border-radius: 5px;
- 
-    .detailItem{
+
+    .detailItem {
         display: flex;
         margin-bottom: 0.5rem;
-        div{
+
+        div {
             margin-left: 0.5rem;
         }
-        .title{
+
+        .title {
             font-weight: 500;
         }
     }
 
-    .fileDetail_imgdetails{
+    .fileDetail_imgdetails {
         display: flex;
-        .fileDetail_imgdetails_details{
+
+        .fileDetail_imgdetails_details {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        img{
+
+        img {
             margin-right: 1rem;
             width: 60%;
         }
-        h3{
+
+        h3 {
             margin-bottom: 0.5rem;
         }
-        .detailButton{
+
+        .detailButton {
             cursor: pointer
         }
     }
 
-    .fileDetail_extraDetails{
+    .fileDetail_extraDetails {
         margin-top: 1rem;
-        .detailItem div{
+
+        .detailItem div {
             margin-left: 0;
         }
-        .tags{
+
+        .tags {
             display: flex;
-            .tag{
+
+            .tag {
                 display: flex;
                 align-items: center;
                 padding: 0.3rem 0.5rem;
@@ -137,21 +164,55 @@
                 border-radius: 20px;
                 margin-right: 0.5rem;
                 border: none;
-                p{
+
+                p {
                     color: $white;
                     margin-right: 0.5rem;
                 }
-                svg path{
+
+                svg path {
                     fill: white;
                 }
             }
         }
-        .links{
+
+        .links {
             display: flex;
-            .link{
+
+            .link {
                 margin-right: 0.5rem;
                 text-decoration: underline;
             }
         }
+    }
+}
+
+.fileTypeListMode {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    @include bottomborderwhite();
+    .name{
+        display: flex;
+        p{
+            margin-left: 0.5rem;
+        }
+    }
+    div,
+    .data {
+        display: inline-block;
+        width: 20%;
+    }
+    .tags{
+        margin: 0
+    }
+    .tag {
+        padding: 0.3rem 0.5rem;
+        background-color: $blue;
+        border-radius: 20px;
+        border: none;
+        display: inline-flex;
+        color: $white;
+        margin: 0 0.5rem 0 0
     }
 }

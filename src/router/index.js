@@ -6,6 +6,7 @@ import Favourites from '../views/Favourites.vue'
 import Files from '../views/Files.vue'
 import FileDetail from '../views/FileDetail.vue'
 import Settings from '../views/Settings.vue'
+import Test from '../views/Test.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,10 @@ const router = createRouter({
       path: '/Settings',
       name: 'settings',
       component: Settings
+    },
+    {
+      path: '/Test',
+      component: Test
     }
     // {
     //   path: '/about',

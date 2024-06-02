@@ -32,12 +32,15 @@
     }
 }
 
-.fileTypeTitle{
+.h2Title{
     margin-bottom: 1rem;
     @include titleFont(20px, $black)
 }
+.sectionTitle{
+    margin-bottom: 0;
+}
 
-.fileTypeList{
+.fileTypeTiles{
     display: flex;
     flex-wrap: wrap;
     @include bottomnoborder();

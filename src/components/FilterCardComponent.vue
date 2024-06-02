@@ -5,7 +5,7 @@ export default {
     props: [
         "icon",
         "type",
-        "color"
+        "color",
     ],
     components: {
         Icon

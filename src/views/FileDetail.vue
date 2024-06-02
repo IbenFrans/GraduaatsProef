@@ -50,7 +50,7 @@ export default {
         },
         formattedDate(dateString) {
             const fileDate = new Date(dateString)
-            return format(fileDate, "dd MMMM yyyy, HH:mm:ss")
+            return format(fileDate, "dd MMMM yyyy, HH:mm")
         },
         fileSizeFormat(size) {
             if (size < 1024) { return size + " Bytes" }
@@ -159,9 +159,16 @@ export default {
 
         }
 
-    },
+    },watch: {
+    '$route.params.name': {
+      immediate: true,
+      handler() {
+        this.findFile();
+      }
+    }
+  },
     mounted() {
-        if (this.files.length === 0) {
+        if (this.files.length === 0 || this.filteredFile.name !== this.$route.params.name) {
             this.fetchAndFindFile();
         } else {
             this.findFile();

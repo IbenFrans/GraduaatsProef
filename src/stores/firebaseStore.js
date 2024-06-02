@@ -7,6 +7,16 @@ export const useFirebaseStore = defineStore('firebase', {
   state: () => ({
     files: [],
     folders: [],
+    branding: {
+      brandguide: [],
+      logos: [],
+      font: [],
+      icons: []
+    },
+    imgExtensions: ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "tif", "webp", "svg", "heif", "heic"],
+    docuExtensions: ["txt", "doc", "docx", "odt", "rtf", "wpd", "xls", "xlsx", "ods", "csv", "tsv", "ppt", "pptx", "odp", "key", "html", "htm", "xml", "xhtml", "epub", "mobi", "azw", "azw3", "md", "tex", "rst", "accdb", "mdb", "sqlite", "zip", "rar", "7z"],
+    pdfExtensions: ["pdf", "ps", "eps",],
+    vidExtensions: ["mp4", "avi", "mov", "wmv", "flv", "mkv", "webm", "vob", "ogv", "m4v", "3gp", "3g2", "mpg", "mpeg", "mts", "m2ts", "ts"],
   }),
   getters: {
     favourites() {
@@ -26,6 +36,75 @@ export const useFirebaseStore = defineStore('firebase', {
     },
   },
   actions: {
+    // async fetchBranding() {
+    //   let brandguide = []
+    //   let logos = []
+    //   let colors = []
+    //   let font = []
+    //   let icons = {}
+
+    //   const brandguideRef = storage.ref("/branding/brandguide")
+    //   const logosRef = storage.ref("/branding/logos")
+    //   const colorsRef = storage.ref("/branding/colors")
+    //   const fontRef = storage.ref("/branding/font")
+    //   const iconsRef = storage.ref("/branding/icons")
+
+    //   const refList = [brandguideRef, logosRef, fontRef, iconsRef]
+
+    //   try {
+    //     for(const ref of refList){
+    //       const refResult = await ref.listAll()
+    //       for (const fileRef of refResult.items){
+    //         const metaData = await this.getFileMetadata(fileRef)
+    //         let file = {
+    //           name: metaData.name,
+    //           url: await this.getFileUrl(fileRef),
+    //           type: metaData.type,
+    //           size: metaData.size
+    //         }
+    //         console.log(file)
+    //         if(ref == storage.ref("/branding/brandguide")){
+    //           brandguide.push(file)
+    //         } else if (ref == storage.ref("/branding/logos")){
+    //           logos.push(file)
+    //         } else if (ref == storage.ref("/branding/font")){
+    //           font.push(file)
+    //         } else if (ref == storage.ref("/branding/font")){
+    //           font.push(file)
+    //         }
+    //       }
+    //     }
+    //     this.branding = {
+    //       brandguide: this.brandguide,
+    //       logos: this.logos,
+    //       font: this.font,
+    //       icons: this.icons
+    //     }
+    //     console.log(this.branding)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+
+    // },
+    async getFilesLocation(location) {
+      try {
+        const storage = getStorage();
+        const listRef = ref(storage, location);
+        const res = await listAll(listRef);
+        for (const itemRef of res.items) {
+          const fileUrl = await this.getFileUrl(itemRef);
+          this.files.push({
+            name: itemRef.name,
+            url: fileUrl,
+            size: itemRef.size,
+            type: itemRef.type
+          })
+        };
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
+
     async fetchFiles() {
       const storageRef = storage.ref();
       const tempFileList = [];
@@ -72,6 +151,7 @@ export const useFirebaseStore = defineStore('firebase', {
         console.log(error);
       }
     },
+
     getFile(name) {
       return this.files.find(file => file.name === name)
     },
@@ -155,8 +235,10 @@ export const useFirebaseStore = defineStore('firebase', {
         console.log('Error updating file:', error);
       }
     },
+
   },
   onCreated() {
     this.fetchFiles()
+    this.fetchBranding()
   }
 })

@@ -1,0 +1,65 @@
+@use 'base' as *;
+
+.brandguideSection{
+    background-color: $lightblue;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0.5rem 0 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    a {
+        text-decoration: underline;
+    }
+    .logoList{
+        width: 100%;
+        li {
+            @include bottomborderwhite();
+            margin-bottom: 1rem;
+
+            &:last-child{
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            .logoData{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+            }
+            img{
+                max-height: 10rem;
+                padding: 0.5rem;
+            }
+        }
+    }
+
+    .colorList{
+        width: 100%;
+        .colorItem{
+            display: flex;
+            @include bottomborderwhite();
+            margin-bottom: 1rem;
+
+            &:last-child{
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            .color{
+                min-height: 5rem;
+                min-width: 5rem;
+                border-radius: 5px;
+                margin-right: 1rem;
+            }
+            .colorDetail{
+                h3{
+                    font-weight: 400;
+                }
+            }
+            .icons{
+                width: 100%;
+                text-align: end;
+                justify-self: flex-end;
+            }
+        }
+    } 
+}
